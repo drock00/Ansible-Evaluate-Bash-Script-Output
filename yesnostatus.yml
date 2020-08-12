@@ -1,0 +1,24 @@
+#Derek Calzadillas Was Here
+---
+- name: fail or succeed based on bash script outcome
+  hosts: region,!prod
+  tasks:
+    - name: create a file yesno on remote nodes
+      file:
+        path: /tmp/yesno
+        state: touch
+        mode: 0777
+    - name: make the file a bash script
+      lineinfile:
+        path: /tmp/yesno
+        line: "#!/bin/bash"
+        state: present
+    - name: make the script echo the 1st arg it received from the user
+      lineinfile:
+        path: /tmp/yesno
+        line: "echo $1"
+        state: present
+    - name: run the script hardcoding the 1st arg | change for different outcomes
+      shell: /tmp/yesno yes
+      register: result
+      failed_when: "'yes' != result.stdout"
