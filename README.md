@@ -1,5 +1,5 @@
 
-# Ansible-Lecter-Script-Result-Control-Status
+# Ansible-Evaluate-Bash-Script-Output
 
 ### Ansible - Scripts that Depend on Particular Output for Task Success
 
